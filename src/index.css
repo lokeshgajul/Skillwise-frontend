@@ -1,2 +1,92 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (ThemeContext toggles .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer utilities {
+  .dark .autofill-fix:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #292928 inset !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(90deg, #2563eb, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Shared SkillWise component classes — use these to keep pages
+   visually consistent across dark/light themes.
+   ------------------------------------------------------------------ */
+@layer components {
+  .sw-card {
+    @apply rounded-2xl border bg-white/90 border-slate-200 shadow-sm backdrop-blur-md;
+  }
+  .dark .sw-card {
+    @apply bg-zinc-900/90 border-zinc-800 shadow-black/20;
+  }
+
+  .sw-card-muted {
+    @apply rounded-2xl border bg-slate-50/80 border-slate-200/80;
+  }
+  .dark .sw-card-muted {
+    @apply bg-zinc-900/50 border-zinc-800/80;
+  }
+
+  .sw-input {
+    @apply w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm
+      placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500
+      transition-shadow;
+  }
+  .dark .sw-input {
+    @apply bg-zinc-900/80 border-zinc-700 text-zinc-100 placeholder:text-zinc-500;
+  }
+
+  .sw-btn-primary {
+    @apply w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+      bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white text-sm font-semibold
+      hover:opacity-90 active:scale-[0.99] transition-all cursor-pointer
+      disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .sw-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium
+      border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer;
+  }
+  .dark .sw-btn-ghost {
+    @apply border-zinc-700 text-zinc-200 hover:bg-zinc-800;
+  }
+
+  .sw-pill {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium border;
+  }
+
+  .sw-label {
+    @apply block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1.5;
+  }
+  .dark .sw-label {
+    @apply text-zinc-400;
+  }
+}
+
+/* Legacy landing/auth gradient (kept for the pink→teal brand moments) */
+.gradient-border-custom {
+  --border-width: 2px;
+  background: linear-gradient(to left, #f7def7, #c2f1f5);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: var(--border-width) solid transparent;
+}

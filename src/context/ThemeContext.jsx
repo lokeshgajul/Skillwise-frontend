@@ -1,19 +1,19 @@
-import React from "react";
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("dark");
 
-  // Apply theme styles to the body
   const applyTheme = (currentTheme) => {
     if (currentTheme === "light") {
-      document.body.style.background = "#ffff";
-      document.body.style.color = "#000";
+      document.documentElement.classList.remove("dark");
+      document.body.style.background = "#f8fafc";
+      document.body.style.color = "#0f172a";
     } else {
-      document.body.style.background = "#1E201E";
-      document.body.style.color = "#EAEFEF";
+      document.documentElement.classList.add("dark");
+      document.body.style.background = "#18181b";
+      document.body.style.color = "#f8fafc";
     }
   };
 
@@ -25,7 +25,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme);
     applyTheme(savedTheme);
   }, []);

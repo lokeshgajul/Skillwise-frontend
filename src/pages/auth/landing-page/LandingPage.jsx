@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Disclosure,
   DisclosureButton,
@@ -8,8 +8,18 @@ import {
 import { motion } from "framer-motion";
 import { FaAngleUp } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
-import { ThemeContext } from "../../context/ThemeContext";
-import ReactImg from "../../assets/images/React.png";
+import { ThemeContext } from "../../../context/ThemeContext";
+import ReactImg from "../../../assets/images/React.png";
+import { Link } from "react-router-dom";
+import Header from "../header/Header";
+import image from "../../../assets/images/image.png";
+import OverlayImage from "../../../assets/images/HomeImage.png";
+
+// ${
+//             theme == "light"
+//               ? " bg-gradient-to-l from-[#f7def7] to-[#c2f1f5]"
+//               : "bg-[#282828]"
+//           }
 
 const LandingPage = () => {
   const { theme } = useContext(ThemeContext);
@@ -41,57 +51,61 @@ const LandingPage = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.1 }}
     >
-      <div
-        className={` ${
-          theme == "light" && " bg-gradient-to-l from-[#f7def7] to-[#c2f1f5]"
-        }`}
-      >
-        <div className="flex flex-row justify-between items-center px-3 lg:px-6 py-4 border-b-[0.5px] border-gray-400">
-          <ul>
-            <li>
-              {" "}
-              <span className="text-lg font-serif font-semibold tracking-wide">
-                SkillWise
-              </span>
-            </li>
-          </ul>
-          <ul className="flex flex-row justify-center items-center space-x-3 p-1 rounded-md font-normal tracking-wide text-[15px]">
-            <li className="max-md:hidden">Roadmaps</li>
-            <li className="max-md:hidden">Get Started </li>
-            <li>
-              <button
-                className="px-4 py-2 hover:font-medium cursor-pointer rounded-full text-[15px] bg-blue-400 text-white"
-                type="button"
-              >
-                Sign In
-              </button>
-            </li>
-          </ul>
-        </div>
+      <div className="bg-[#f9f9fb]">
+        <Header />
+        <div className={`grid grid-cols-5 gap-2.5 h-96 px-8 w-full`}>
+          <div className="col-span-2 flex justify-center items-start flex-col">
+            <p className="max-lg:text-[30px] lg:text-[40px] capitalize font-semibold leading-12 mb-2">
+              Transform Learning with AI-Powered Intelligence
+            </p>
+            <p className="text-gray-500">
+              Master new skills with structured roadmaps, tutorials, and
+              progress tracking — start your learning journey today.
+            </p>
 
-        <div className=" flex justify-center items-center flex-col h-96">
-          <h1 className="max-lg:text-[30px] lg:text-[40px] text-center capitalize font-bold tracking-normal">
-            unlock your potential with skillwise
-          </h1>
-          <p className="text-center">
-            Master new skills with structured roadmaps , tutorial and progress
-            tracking start your learning journey today.
-          </p>
-          <div>
-            <button
-              className="px-4 py-2 hover:font-medium cursor-pointer mt-3 rounded-full text-[15px] bg-blue-400 text-white"
-              type="button"
-            >
-              Get Started{" "}
-            </button>
+            <div className="flex flex-row gap-6 mt-5">
+              <Link to="/signin">
+                <button
+                  className="px-4 py-2 rounded-md text-[15px] bg-blue-400 hover:bg-blue-500 text-white font-medium transition"
+                  type="button"
+                >
+                  Start Learning Today
+                </button>
+              </Link>
+
+              <span className="text-[15px] font-medium cursor-pointer border-b-2 py-1 mb-2 border-blue-600 hover:text-blue-600 transition">
+                Explore Features
+              </span>
+            </div>
           </div>
+
+          <div className="col-span-3 flex justify-center items-center flex-col relative w-full h-[400px]">
+            {/* Background image */}
+            <img
+              src={image}
+              alt="bgImage"
+              className="mt-12 h-full rounded-md"
+            />
+
+            {/* Overlay image */}
+            <img
+              src={OverlayImage}
+              alt="Overlay"
+              className="absolute opacity-60 rounded-md"
+            />
+          </div>
+
+          {/* *****
+           *********
+           **********
+           */}
         </div>
       </div>
 
-      <div className="bg-[#f9f9fb]">
+      <div className={` ${theme == "dark" && "bg-[#282828]"} `}>
         <div className="flex justify-center flex-col px-8 pt-10 pb-6">
           <h1 className="max-lg:text-[20px] lg:text-[30px] capitalize font-bold tracking-normal ">
-            Why Choose Skillwise?
+            your Journey to Smater learning
           </h1>
           <p className="my-2">
             Skillwise offers a comprehensive learning designed to help you
@@ -113,11 +127,19 @@ const LandingPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.2 }}
                     className="cursor-pointer shadow-md hover:shadow-xl rounded-xl overflow-hidden transition duration-300 ease-in-out mt-4"
                   >
-                    <div className="border-[1px] border-gray-300 p-2 rounded-md mt-2 bg-white hover:shadow-lg">
+                    <div
+                      className={` border-[1px] border-gray-300 p-4 rounded-md mt-2 ${
+                        theme == "dark" ? "bg-[#3C3D37]" : "bg-white"
+                      }hover:shadow-lg `}
+                    >
                       <span className="text-[15px] font-serif font-semibold tracking-wide">
                         Personalized Learning Paths
                       </span>
-                      <p className="text-sm text-gray-600 pt-1">
+                      <p
+                        className={` text-sm ${
+                          theme == "dark" ? "text-white" : "text-gray-600"
+                        } pt-1 `}
+                      >
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Animi corrupti nesciunt labore, repudiandae saepe
                         accusamus perspiciatis vitae.
@@ -130,12 +152,24 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className=" px-8 bg-[#f9f9fb] pb-20 pt-9">
+        <div
+          className={` px-8 ${
+            theme == "dark" ? "bg-[#282828]" : "bg-[#f9f9fb]"
+          }  pb-20 pt-9`}
+        >
           <div className="text-left">
-            <h2 className="text-3xl font-bold font-serif mb-2 text-gray-800">
+            <h2
+              className={` text-3xl font-bold font-serif mb-2 ${
+                theme == "dark" ? "text-white" : "text-gray-800"
+              } `}
+            >
               🚀 Feature Roadmaps
             </h2>
-            <p className="text-gray-600 text-sm">
+            <p
+              className={` text-sm ${
+                theme == "dark" ? "text-white" : "text-gray-600"
+              } pt-1 `}
+            >
               Explore expertly curated paths to grow your tech skills.
             </p>
           </div>
@@ -148,7 +182,9 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="cursor-pointer bg-white shadow-md hover:shadow-xl rounded-xl overflow-hidden transition duration-300 ease-in-out"
+                className={` cursor-pointer ${
+                  theme == "dark" ? "bg-[#323232] " : "bg-[#f9f9fb]"
+                }  shadow-md hover:shadow-xl rounded-xl overflow-hidden transition duration-300 ease-in-out`}
               >
                 <img
                   src={item.img}
@@ -156,10 +192,20 @@ const LandingPage = () => {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold font-serif text-gray-800 mb-2">
+                  <h3
+                    className={`text-lg font-semibold font-serif ${
+                      theme == "dark" ? "text-white" : "text-gray-800"
+                    } mb-2`}
+                  >
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-600">{item.description}</p>
+                  <p
+                    className={` text-sm ${
+                      theme == "dark" ? "text-white" : "text-gray-800"
+                    }`}
+                  >
+                    {item.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -167,30 +213,42 @@ const LandingPage = () => {
         </div>
 
         {/* FAQs  */}
-        <div className="px-8 pb-8 bg-[#f9f9fb]">
+        <div
+          className={` px-8 pb-8 ${
+            theme == "dark" ? "bg-[#282828]" : "bg-[#f9f9fb]"
+          } `}
+        >
           <h2 className=" text-xl font-serif font-semibold tracking-normal">
             Frequently Asked Questions{" "}
           </h2>
           <div className="flex flex-col my-1 flex-wrap">
             {[1, 2, 3].map((item, index) => {
               return (
-                <div key={index} className="my-2">
+                <div key={index} className="my-3">
                   <Disclosure
                     as="div"
-                    className="w-full p-3 rounded-md bg-[#f1efef] border-[1px] border-[#f3f1f1]"
+                    className={` w-fit  p-3 rounded-md ${
+                      theme == "dark" ? "bg-[#323232]" : "bg-[#f9f9fb]"
+                    } border-[1px] border-[#f3f1f1]`}
                   >
                     {({ open }) => (
                       <>
                         <div className="flex flex-row justify-between space-x-2">
                           <p>
                             Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Doloremque, eligendi?
+                            elit.
                           </p>
                           <DisclosureButton className="text-left">
                             {open ? (
-                              <FaAngleDown size={24} color="black" />
+                              <FaAngleDown
+                                size={20}
+                                color={theme == "dark" ? "white" : "black"}
+                              />
                             ) : (
-                              <FaAngleUp size={24} color="black" />
+                              <FaAngleUp
+                                size={20}
+                                color={theme == "dark" ? "white" : "black"}
+                              />
                             )}
                           </DisclosureButton>
                         </div>
@@ -204,7 +262,11 @@ const LandingPage = () => {
                           leaveFrom="opacity-100 translate-y-0"
                           leaveTo="opacity-0 -translate-y-2"
                         >
-                          <DisclosurePanel className="pt-3 text-gray-700">
+                          <DisclosurePanel
+                            className={`pt-3 ${
+                              theme == "dark" ? "text-white" : "text-gray-700"
+                            }`}
+                          >
                             Yes! You can purchase a license that you can share
                             with your entire team.
                           </DisclosurePanel>
